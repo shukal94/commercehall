@@ -25,6 +25,8 @@ def make_matrix():
                 ),
                 fill=dict[point_columns]
             )
+            pointer_x+=1
+        pointer_y+=1
     img.save('Схема.png')
     return json.jsonify(size)
 
