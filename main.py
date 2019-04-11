@@ -62,6 +62,19 @@ def calculate_new_size(point_x, point_y, state_dictionary, state_matrix):
             state_matrix[temp_point_y][temp_point_x] = 'Done'
             temp_point_x += 1
         temp_point_y += 1
+            draw.rectangle(
+                (
+                    (pointer_x)*zoom,
+                    (pointer_y)*zoom,
+                    (pointer_x+1)*zoom,
+                    (pointer_y+1)*zoom
+                ),
+                fill=dict[point_columns]
+            )
+            pointer_x+=1
+        pointer_y+=1
+    img.save('Схема.png')
+    return json.jsonify(size)
 
 
 if __name__ == '__main__':
