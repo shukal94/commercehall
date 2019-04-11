@@ -8,7 +8,7 @@ zoom = 3
 
 @app.route("/", methods=['GET', 'POST'])
 def draw_scheme():
-    state_matrix = make_state_matrix()
+    state_matrix = json.request
     state_dictionary = {'Not_Available': 'red',
                         'Available': 'green',
                         'Cashbox': 'yellow',
@@ -16,33 +16,6 @@ def draw_scheme():
                         'Done': 'black'}
     draw_image(state_matrix, state_dictionary)
     return "Done"
-
-
-"""Function until we don't have correct json request"""
-
-
-def make_state_matrix():
-    """ 1 = 10 santimetres
-        10 = 1 metre"""
-    data = []
-    point_y = 0
-    while point_y < 700*zoom:
-        pointer_x = 0
-        data.append([])
-        while pointer_x < 500*zoom:
-            data[point_y].append('Available')
-            pointer_x += 1
-        point_y += 1
-    point_y = 200
-    temp_pointer_x = 100
-    temp_pointer_y = point_y
-    while point_y < temp_pointer_y+(80*zoom):
-        pointer_x = 100
-        while pointer_x < temp_pointer_x+(10*zoom):
-            data[point_y][pointer_x] = 'Rack'
-            pointer_x += 1
-        point_y += 1
-    return data
 
 
 def draw_image(state_matrix, state_dictionary):
