@@ -4,21 +4,22 @@ from PIL import Image, ImageDraw
 
 app = Flask(__name__)
 zoom = 3
+state_dictionary = {'Not_Available': 'red',
+                    'Available': 'green',
+                    'Cashbox': 'yellow',
+                    'Rack': 'blue',
+                    'Done': 'black'}
+state_matrix = 0
 
 
 @app.route("/", methods=['GET', 'POST'])
 def draw_scheme():
-    state_matrix = json.request
-    state_dictionary = {'Not_Available': 'red',
-                        'Available': 'green',
-                        'Cashbox': 'yellow',
-                        'Rack': 'blue',
-                        'Done': 'black'}
-    draw_image(state_matrix, state_dictionary)
+    state_matrix = json.reques
+    draw_image()
     return "Done"
 
 
-def draw_image(state_matrix, state_dictionary):
+def draw_image():
     img = Image.new('RGB', (700*zoom, 500*zoom), color='white')
     draw = ImageDraw.Draw(img)
     point_y = 0
@@ -49,7 +50,7 @@ def draw_image(state_matrix, state_dictionary):
     img.save('Scheme.png')
 
 
-def calculate_new_size(point_x, point_y, state_dictionary, state_matrix):
+def calculate_new_size(point_x, point_y):
     furniture = state_dictionary[state_matrix[point_y][point_x]]
     temp_point_y = point_y
     temp_point_x = point_x
